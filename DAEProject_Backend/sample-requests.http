@@ -1,0 +1,89 @@
+### login
+# @name login
+POST http://localhost:8080/academics/api/v1/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "mod1@mail.pt",
+  "password": "mod1"
+}
+
+> {%
+    client.global.set("token", response.body.token);
+    client.global.set("id", response.body.user.id);
+%}
+
+### edit poublication
+PATCH http://localhost:8080/academics/api/v1/publications/2
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "abstract": "adada"
+}
+
+### Get me user
+GET http://localhost:8080/academics/api/v1/users/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get me coins
+GET http://localhost:8080/academics/api/v1/users/me/coins
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get me matches
+GET http://localhost:8080/academics/api/v1/users/{{id}}/matches
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get me transactions
+GET http://localhost:8080/academics/api/v1/users/{{id}}/transactions?type=C
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### post coin-purchases
+POST http://localhost:8080/academics/api/v1/coin-purchases
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+    "euros": 1,
+    "payment_type": "MBWAY",
+    "payment_reference": "912345678"
+}
+
+### Get leaderboard
+GET http://localhost:8080/academics/api/v1/leaderboard
+Content-Type: application/json
+Accept: application/json
+
+### Get me stats
+GET http://localhost:8080/academics/api/v1/statistics/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get public stats
+GET http://localhost:8080/academics/api/v1/statistics/public
+Content-Type: application/json
+Accept: application/json
+
+### Get admin stats
+GET http://localhost:8080/academics/api/v1/admin/statistics
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get admin stats
+GET http://localhost:8080/academics/api/v1/admin/users
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
